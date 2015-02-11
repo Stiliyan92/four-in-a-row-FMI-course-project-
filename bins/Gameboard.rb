@@ -1,5 +1,17 @@
 require_relative './HeuristicValues.rb'
 
+def dup_recursive(new_array, old_array)
+  old_array.each do |item|
+    if item.class == Array
+      new_array << dup_recursive([], item)
+    else
+      new_item = item.dup rescue new_item = item # in case it's got no dupe, like FixedNum
+      new_array << new_item
+    end
+    new_array
+  end
+end
+
 class GameBoard
   
   attr_accessor :turn, :board
@@ -14,13 +26,12 @@ class GameBoard
  #   @empty_fields = 42
   end
 
-  #used for generating moves from current board
-  def clone
-    new_board = GameBoard.new(@player, @computer, @turn)
-    new_board.board = @board.clone
-#    new_board.empty_fields = @empty_fields
-    new_board
-  end
+   #used for generating moves from current board
+   def initialize_copy(other)
+     super
+     self.board = []
+     dup_recursive(self.board, other.board)
+   end
 
   def get_anti_diagonals
     array_of_diagonals = ["", "", "", ""]
@@ -58,6 +69,7 @@ class GameBoard
 
   def generate_moves(turn)
     played_next_moves = []
+    p self.board.object_id 
     0.upto(6) do |col|
       next_move = self.clone
       next_move.place_in_column(col, turn)
@@ -102,4 +114,11 @@ my_game.generate_moves('W').each do |game|
   game.print_board
 end
 
-my_game.print_board
+  #used for generating moves from current board
+#  def clone
+#    new_board = GameBoard.new(@player, @computer, @turn)
+#    new_board.board = []
+#    dup_recursive(new_board.board, @board)
+#    new_board.empty_fields = @empty_fields
+#    new_board
+#  end
