@@ -95,23 +95,24 @@ class GameBoard
  #   @empty_fields = 42
   end
 
-  def dup_recursive(new_array, old_array)
+  def dup_recursive(old_array)
+    new_array = []
     old_array.each do |item|
       if item.class == Array
-        new_array << dup_recursive([], item)
+        new_array << dup_recursive(item)
       else
         new_item = item.dup rescue new_item = item # in case it's got no dupe, like FixedNum
         new_array << new_item
       end
-      new_array
     end
+    new_array
   end
   
    #used for generating moves from current board
   def initialize_copy(other)
     super
     self.board = []
-    dup_recursive(self.board, other.board)
+    self.board = dup_recursive(other.board)
   end
 
   def set_field(row, column, player)
@@ -137,14 +138,15 @@ class GameBoard
     end
   end
 
-  def calculate_score(last_played)
-    score = 0
+  def evaluate_board
+    score_player, score_ai = 0, 0
     get_line_methods = %w(rows columns diagonals anti_diagonals)
     get_line_methods.each do |method|
       lines = self.send "get_#{method}"
-      score += @@heuristic_values.calculate_score(lines, last_played)
+      score_player += @@heuristic_values.calculate_score(lines, 'O')
+      score_ai += @@heuristic_values.calculate_score(lines, 'X')
     end
-    score
+    score = score_ai - score_player
   end
 
   def end_of_game(last_played)
@@ -171,8 +173,7 @@ class GameBoard
     played_next_moves = []
     0.upto(6) do |col|
       next_move = self.clone
-      next_move.place_in_column(col, turn)
-      played_next_moves << next_move
+      played_next_moves << next_move if next_move.place_in_column(col, turn)
     end
     played_next_moves
   end
@@ -184,39 +185,6 @@ class GameBoard
     end
   end
 end
-
-my_game = GameBoard.new
-#my_game.print_elements
-my_game.set_field(2,2, 'O')
-my_game.set_field(3,3, 'X')
-my_game.set_field(2,3, 'X')
-my_game.set_field(5,1, "F")
-
-my_game.set_field(4,2, 'X')
-my_game.set_field(4,3, 'X')
-
-p my_game.place_in_column(2,'O')
-p my_game.place_in_column(2,'O')
-p my_game.place_in_column(4,'X')
-p my_game.place_in_column(4,'X')
-p my_game.place_in_column(4,'X')
-p my_game.place_in_column(4,'X')
-
-my_game.print_board
-
-rows = my_game.get_rows
-
-p my_game.get_anti_diagonals
-p my_game.get_diagonals
-my_hash = HeuristicValues.new
-p my_hash.calculate_score(my_game.get_anti_diagonals, 'X')
-
-
-#my_game.generate_moves('W').each do |game|
-#  game.print_board
-#end
-
-
 
   #used for generating moves from current board
 #  def clone
