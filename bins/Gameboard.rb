@@ -27,7 +27,7 @@ module GameBoardGetMethods
     column_lines
   end
 
- def get_anti_diagonals
+  def get_anti_diagonals
     diagonal_lines = []
     
     0.upto(@@width - @@connect) do |column|
@@ -85,14 +85,15 @@ class GameBoard
 
   @@heuristic_values = HeuristicValues.new
 
-  attr_accessor :turn, :board
+  attr_accessor :board, :score
 #  attr_writer :board
 
   def initialize(to_play_first = 'X')
     @none = 'E'
     @board = Array.new(6) { Array.new(7, @none) }
-    @turn = to_play_first
+#    @turn = to_play_first
  #   @empty_fields = 42
+    @score = 0
   end
 
   def dup_recursive(old_array)
@@ -143,10 +144,10 @@ class GameBoard
     get_line_methods = %w(rows columns diagonals anti_diagonals)
     get_line_methods.each do |method|
       lines = self.send "get_#{method}"
-      score_player += @@heuristic_values.calculate_score(lines, 'O')
-      score_ai += @@heuristic_values.calculate_score(lines, 'X')
+      score_player += @@heuristic_values.calculate_score(lines, 'X')
+      score_ai += @@heuristic_values.calculate_score(lines, 'O')
     end
-    score = score_ai - score_player
+    @score = score_ai - score_player
   end
 
   def end_of_game(last_played)
@@ -178,12 +179,6 @@ class GameBoard
     played_next_moves
   end
 
-  def print_board
-    p "#   1   2   3   4   5   6   7  "
-    @board.reverse.each_with_index do |row, index|
-      p "#{@board.size - index}  |#{row.join("| |")}| "
-    end
-  end
 end
 
   #used for generating moves from current board

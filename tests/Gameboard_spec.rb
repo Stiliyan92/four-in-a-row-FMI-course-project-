@@ -164,7 +164,7 @@ describe GameBoard do
   end
 
   it 'evaluates board with proper score' do
-    expect(@gameboard.evaluate_board).to eq -95
+    expect(@gameboard.evaluate_board).to eq 116
   end
 
   it 'generates moves properly - returns proper sized Array' do

@@ -30,15 +30,15 @@ class HeuristicValues
     @combos_o[/E{1,3}OE{1,3}/]   = 10
     @combos_o[/EOEO[^E]*/]       = 10
     @combos_o[/[^E]*OEOE/]       = 10
-    @combos_o[/XOOEE/]           = 5
-    @combos_o[/XOEEE/]           = 1
-    @combos_o[/EEOOX/]           = 5 
-    @combos_o[/EEEOX/]           = 1
-    @combos_o[/\AOOEE/]          = 5
-    @combos_o[/\AOEEE/]          = 1
-    @combos_o[/EEOO\z/]          = 5
-    @combos_o[/EEEO\z/]          = 1
-    @combos_o[/.*/]               = 0
+    @combos_o[/XOOEE/]           = 10
+    @combos_o[/XOEEE/]           = 2
+    @combos_o[/EEOOX/]           = 10 
+    @combos_o[/EEEOX/]           = 2
+    @combos_o[/\AOOEE/]          = 10
+    @combos_o[/\AOEEE/]          = 2
+    @combos_o[/EEOO\z/]          = 10
+    @combos_o[/EEEO\z/]          = 2
+    @combos_o[/.*/]              = 0
 #    @combos_o[/[^X]OOO[^O]/]     = 80
 #    @combos_o[/^OOO[^O]/]        = 100
   end
