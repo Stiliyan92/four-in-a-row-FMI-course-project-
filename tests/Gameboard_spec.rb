@@ -25,7 +25,7 @@ describe GameBoard do
     expect(@gameboard.board.size).to eq 6
   end
 
-  it 'gets 6 rows from ::get_rows' do
+  it 'gets 6 rows from #get_rows' do
     expect(@gameboard.get_rows.size).to eq 6
   end
 
@@ -37,7 +37,7 @@ describe GameBoard do
     expect(@gameboard.get_rows[1]).to eq 'OXOOXXO'
   end
 
-  it 'gets 7 columns from ::get_columns' do
+  it 'gets 7 columns from #get_columns' do
     expect(@gameboard.get_columns.size).to eq 7
   end
 
@@ -49,27 +49,27 @@ describe GameBoard do
     expect(@gameboard.get_columns[3]).to eq 'OOOEEE'
   end
 
-  it 'gets 6 diagonals from ::get_diagonals' do
+  it 'gets 6 diagonals from #get_diagonals' do
     expect(@gameboard.get_diagonals.size).to eq 6
   end
 
-  it 'gets 6 anti diagonals from ::get_anti_diagonals' do
+  it 'gets 6 anti diagonals from #get_anti_diagonals' do
     expect(@gameboard.get_anti_diagonals.size).to eq 6
   end
 
-  it 'creates proper string from ::get_anti_diagonal' do
+  it 'creates proper string from #get_anti_diagonal' do
     expect(@gameboard.get_anti_diagonal(0, 0)).to eq 'XXXEEE'
   end
 
-  it 'creates proper string from ::get_anti_diagonal' do
+  it 'creates proper string from #get_anti_diagonal' do
     expect(@gameboard.get_anti_diagonal(1,0)).to eq 'OEEEE'
   end
 
-  it 'creates proper string from ::get_diagonal' do
+  it 'creates proper string from #get_diagonal' do
     expect(@gameboard.get_diagonal(0, 3)).to eq 'OOEE'
   end
 
-  it 'creates proper string from ::get_diagonal' do
+  it 'creates proper string from #get_diagonal' do
     expect(@gameboard.get_diagonal(1,6)).to eq 'OEEEE'
   end
 
@@ -77,7 +77,7 @@ describe GameBoard do
     expect(@gameboard.board[1][2]).to eq 'O'
   end
 
-  it 'returns true for trying to ::place_in_column in not full column' do
+  it 'returns true for trying to #place_in_column in not full column' do
     expect(@gameboard.place_in_column(2,'X')).to eq true
   end
 
@@ -96,23 +96,23 @@ describe GameBoard do
       expect(@gameboard.board[5][3]). to eq 'X'
     end
 
-    it 'returns false for trying to ::place_in_column in full column' do
+    it 'returns false for trying to #place_in_column in full column' do
       expect(@gameboard.place_in_column(3, 'X')).to eq false
     end
 
-    it 'returns true for ::end_of_game if 4 in a column' do
+    it 'returns true for #end_of_game if 4 in a column' do
       expect(@gameboard.end_of_game('O')).to eq true
     end
 
-    it 'creates proper string from ::get_anti_diagonal' do
+    it 'creates proper string from #get_anti_diagonal' do
       expect(@gameboard.get_anti_diagonal(1,0)).to eq 'OEEXE'
     end
 
-    it 'creates proper string from ::get_diagonal' do
+    it 'creates proper string from #get_diagonal' do
       expect(@gameboard.get_diagonal(1,6)).to eq 'OEEXE'
     end
 
-    it '::generate_moves returns array with 6 elements for board with full column' do
+    it '#generate_moves returns array with 6 elements for board with full column' do
       expect(@gameboard.generate_moves('X').size).to eq 6
     end
 
@@ -125,11 +125,11 @@ describe GameBoard do
       @gameboard.place_in_column(5, 'O')
     end
 
-    it 'returns false for ::end_of_game with only 3 in a row' do
+    it 'returns false for #end_of_game with only 3 in a row' do
       expect(@gameboard.end_of_game('O')).to eq false
     end
 
-    it 'returns true for ::end_of_game with 4 in a row' do
+    it 'returns true for #end_of_game with 4 in a row' do
       @gameboard.place_in_column(6, 'O')
       expect(@gameboard.end_of_game('O')).to eq true
     end
@@ -142,7 +142,7 @@ describe GameBoard do
       @gameboard.place_in_column(3,'X')
     end
 
-   it 'returns true for ::end_of_game with 4 X in a diagonal' do
+   it 'returns true for #end_of_game with 4 X in a diagonal' do
      expect(@gameboard.end_of_game('X')).to eq true
    end
   end
@@ -156,11 +156,11 @@ describe GameBoard do
       @gameboard.place_in_column(3, 'X')
     end
 
-    it 'returns false for ::end_of_game without a winning anti diagonal' do
+    it 'returns false for #end_of_game without a winning anti diagonal' do
       expect(@gameboard.end_of_game('O')).to eq false
     end
 
-    it 'returns true for ::end_of_game with a winning anti diagonal' do
+    it 'returns true for #end_of_game with a winning anti diagonal' do
       @gameboard.place_in_column(3, 'O')
       expect(@gameboard.end_of_game('O')).to eq true
     end
