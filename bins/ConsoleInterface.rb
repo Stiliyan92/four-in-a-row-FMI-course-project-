@@ -1,25 +1,13 @@
 require_relative './Game.rb'
+require_relative './Colorize.rb'
 
 class ConsoleInterface
   
+  include Colorize
+
   def initialize
     @user_input = ''
     @game
-  end
-  
-  def print_menu
-    puts "Started Four-in-a-row game", "Menu:"
-    puts "1.Start new Game",
-         "2.Load game",
-         "3.Quit",
-         "Press 1,2 or 3"
-  end
-
-  def print_board board
-    puts "#   1   2   3   4   5   6   7  "
-    board.reverse.each_with_index do |row, index|
-      puts "#{board.size - index}  |#{row.join("| |")}| "
-    end
   end
 
   def initial_menu
@@ -33,10 +21,11 @@ class ConsoleInterface
   end
 
   def pre_game
-    puts "Select who starts first:",
-         "1.You",
-         "2.Computer",
-         "3.Random"
+    puts "Select who starts first:"
+    puts green "1.You"
+    puts red   "2.Computer"
+    puts       "3.Random"
+    
     player_to_start = gets.to_i
     if player_to_start == 3
       player_to_start = Random.rand(2) + 1
@@ -68,18 +57,18 @@ class ConsoleInterface
 
   def loop_game
     loop do
-      print_board @game.get_board
+      print_colored_board @game.get_board
       player_move_instruction
       read_user_input
       break if @user_input == 0
 	  unless @game.user_move @user_input
-	  	print_board @game.get_board
+	  	print_white_board @game.get_board
         puts "End of game"
 	    break
 	  end
     end
   end
-
+  
   def load_game
   	saved_files = Game.load_game
   	saved_files.each_with_index do |save, index|
