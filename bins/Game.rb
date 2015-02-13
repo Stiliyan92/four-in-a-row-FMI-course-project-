@@ -49,14 +49,23 @@ class Game
   end
 
   def user_move(input)
-    unless @current_board.place_in_column(input - 1, @player)
-      return -1
-    end
+    @current_board.place_in_column(input - 1, @player)
+  end
+  
+  def check_if_player_wins
+  	if @current_board.score < -6000
+  	  return true
+  	else
+  	  return false
+  	end
+  end
+
+  def computer_move
     minimax(@current_board, @max_depth, -1.0/0.0, 1.0/0.0, @computer)
     if(@current_board.score > 60000 or @current_board.score < -60000)
-      return 1
+      return true
     else
-      return 0
+      return false
     end
   end
 
@@ -83,7 +92,6 @@ class Game
     else
       saves = []
     end
-    p saves
     saves
   end
 

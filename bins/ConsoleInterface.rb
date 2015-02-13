@@ -74,15 +74,22 @@ class ConsoleInterface
       player_move_instruction
       read_user_input
       break if @user_input == 0
-	  return_code = @game.user_move @user_input
-	  p return_code
-	  case return_code
-	    when 1 
-	      end_game
-	      break
-	    when -1 
-	      puts "Choose correct column"
+
+	  unless @game.user_move @user_input
+	    puts "Choose correct column"
+	    next
 	  end
+	  
+	  if @game.check_if_player_wins
+	  	end_game
+	    break
+	  end
+
+	  if @game.computer_move
+	  	end_game
+	  	break
+	  end
+	  
     end
   end
 

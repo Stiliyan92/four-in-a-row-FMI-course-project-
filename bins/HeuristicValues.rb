@@ -19,12 +19,12 @@ class HeuristicValues
   def set_heuristic_values_o
     @combos_o[/OOOO/]            = 100000
     @combos_o[/E{1,3}OOOE{1,3}/] = 1000
-    @combos_o[/XOOOE/]           = 600
-    @combos_o[/OOEO/]            = 600
-    @combos_o[/OEOO/]            = 600
-    @combos_o[/\AOOO[E]+/]       = 600
-    @combos_o[/EOOOX/]           = 600
-    @combos_o[/EOOO\z/]          = 600
+    @combos_o[/XOOOE/]           = 500
+    @combos_o[/OOEO/]            = 500
+    @combos_o[/OEOO/]            = 500
+    @combos_o[/\AOOO[E]+/]       = 500
+    @combos_o[/EOOOX/]           = 500
+    @combos_o[/EOOO\z/]          = 500
     @combos_o[/E{1,3}OOE{1,3}/]  = 100
     @combos_o[/EOEOE/]           = 30
     @combos_o[/E{1,3}OE{1,3}/]   = 10

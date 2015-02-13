@@ -133,7 +133,7 @@ class GameBoard
     0.upto(5) do |row|
       if @board[row][column] == @none
         @board[row][column] = player
-#        @empty_fields = @empty_fields - 1
+        evaluate_board
         return true
       end
     end

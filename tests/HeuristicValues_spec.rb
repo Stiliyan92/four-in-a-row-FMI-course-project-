@@ -23,7 +23,7 @@ describe HeuristicValues do
     end
 
     it '::calculate_score for the whole list_of_combos with last move = O' do 
-      expect(@heuristic.calculate_score(@list_of_combos, 'O')).to eq 642
+      expect(@heuristic.calculate_score(@list_of_combos, 'O')).to eq 542
     end
 
     it '::calculate_score for the list_of_combos plus one winning line' do

@@ -81,6 +81,10 @@ describe GameBoard do
     expect(@gameboard.place_in_column(2,'X')).to eq true
   end
 
+  it 'score should be 0' do
+  	expect(@gameboard.score).to eq 16
+  end
+
   context 'gameboard has a winning column' do
     before do
       @gameboard.place_in_column(3, 'O')
@@ -164,7 +168,11 @@ describe GameBoard do
   end
 
   it 'evaluates board with proper score' do
-    expect(@gameboard.evaluate_board).to eq 116
+    expect(@gameboard.evaluate_board).to eq 16
+  end
+
+  it 'sets proper score' do
+  	expect(@gameboard.score).to eq 16
   end
 
   it 'generates moves properly - returns proper sized Array' do
