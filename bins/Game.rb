@@ -4,10 +4,10 @@ class Game
   
   attr_reader :turn
 
-  def initialize(turn = 1, max_depth = 4)
+  def initialize(turn = 1, board = nil, max_depth = 4)
     @player = 'X'
     @computer = 'O'
-    @current_board = GameBoard.new
+    @current_board = board || GameBoard.new
     @max_depth = max_depth
     play_first_move(turn)
   end
@@ -49,36 +49,41 @@ class Game
   end
 
   def user_move(input)
-    @current_board.place_in_column(input - 1, @player)
-     minimax(@current_board, @max_depth, -1.0/0.0, 1.0/0.0, @computer)
+    unless @current_board.place_in_column(input - 1, @player)
+      return -1
+    end
+    minimax(@current_board, @max_depth, -1.0/0.0, 1.0/0.0, @computer)
     if(@current_board.score > 60000 or @current_board.score < -60000)
-      return nil
+      return 1
     else
-      return get_board
+      return 0
     end
   end
 
-  def save_game
-  	print "Enter the name of the save file: "
-  	file_name = gets.chomp
+  def save_game file_name
   	Dir.mkdir('./saved_games') unless File.directory? './saved_games'
   	File.open("./saved_games/#{file_name}", 'w') do |file_descriptor|
   	  saved_bytes = file_descriptor.write(Marshal.dump(@current_board))
   	  if saved_bytes > 0
-        puts "Saved successfully!"
+        return "Saved successfully!"
       else
-        puts "Save error."
+        return "Save error."
   	  end
   	end
   end
 
-  def load_game(files, choice)
-  	file_descriptor = File.open("./saved_games/#{files[choice]}")
+  def load_game(file)
+  	file_descriptor = File.open("./saved_games/#{file}")
   	@current_board = Marshal.load(file_descriptor)
   end
 
-  def self.load_game
-    saves = Dir.entries('./saved_games')
+  def self.load_saved_games
+  	if File.directory? './saved_games'
+      saves = Dir.entries('./saved_games')
+    else
+      saves = []
+    end
+    p saves
     saves
   end
 

@@ -50,7 +50,7 @@ module Colorize
     ansi_code = case symbol
                   when 'X' then "\e[#{32}m#{symbol}\e[0m"
                   when 'O' then "\e[#{31}m#{symbol}\e[0m"
-                  when 'E' then "\e[#{37}m#{symbol}\e[0m"
+                  when 'E' then "\e[#{37}m \e[0m"
                 end
     ansi_code
   end
@@ -75,8 +75,8 @@ module Colorize
     puts magenta "Menu:"
     puts  "1.Start new Game",
           "2.Load game",
-          "3.Quit",
-          "Press 1,2 or 3"
+          "0.Quit",
+          "Press 0,1 or 2"
   end
 
 end
