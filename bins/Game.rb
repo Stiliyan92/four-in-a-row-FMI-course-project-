@@ -1,8 +1,6 @@
 require_relative './Gameboard.rb'
 
 class Game
-  
-  attr_reader :turn
 
   def initialize(turn = 1, board = nil, max_depth = 4)
     @player = 'X'
@@ -10,12 +8,6 @@ class Game
     @current_board = board || GameBoard.new
     @max_depth = max_depth
     play_first_move(turn)
-  end
-
-  def play_first_move(turn)
-    if(turn == 2)
-      minimax(@current_board, @max_depth, -1.0/0.0, 1.0/0.0, @computer)
-    end
   end
 
   def minimax(board, depth, alpha, beta, turn)
@@ -44,7 +36,7 @@ class Game
 	score = turn == @computer ? alpha : beta
   end
 
-  def get_board
+  def get_board_array
     @current_board.board
   end
 
@@ -89,10 +81,18 @@ class Game
   def self.load_saved_games
   	if File.directory? './saved_games'
       saves = Dir.entries('./saved_games')
+      saves.reject!{ |file| file == '.' or file == '..' }
     else
       saves = []
     end
     saves
+  end
+
+  private
+  def play_first_move(turn)
+    if(turn == 2)
+      minimax(@current_board, @max_depth, -1.0/0.0, 1.0/0.0, @computer)
+    end
   end
 
 end

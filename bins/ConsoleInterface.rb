@@ -37,7 +37,7 @@ class ConsoleInterface
   end
 
   def player_move_instruction
-    puts "Select column to play(1...6)",
+    puts "Select column to play(1...7)",
          "press 8 for game save",
          "press 9 for game restart",
          "press 0 for quit"
@@ -64,13 +64,13 @@ class ConsoleInterface
   end
 
   def end_game
-    print_colored_board @game.get_board
+    print_colored_board @game.get_board_array
     puts "End of game"
   end
 
   def loop_game
     loop do
-      print_colored_board @game.get_board
+      print_colored_board @game.get_board_array
       player_move_instruction
       read_user_input
       break if @user_input == 0
@@ -89,7 +89,7 @@ class ConsoleInterface
 	  	end_game
 	  	break
 	  end
-	  
+
     end
   end
 
@@ -100,7 +100,7 @@ class ConsoleInterface
   	  return
   	end
   	saved_files.each_with_index do |save, index|
-  	  puts "#{index}.#{save}" unless save == '.' or save == '..'
+  	  puts "#{index}.#{save}"
   	end
   	"Choose save file 0..#{saved_files.size - 2}:"
   	choice = gets.to_i

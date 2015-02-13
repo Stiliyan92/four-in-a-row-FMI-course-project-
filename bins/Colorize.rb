@@ -78,5 +78,12 @@ module Colorize
           "0.Quit",
           "Press 0,1 or 2"
   end
+  
+  def player_move_instruction
+    puts "Select column to play(1...7)",
+         "press 8 for game save",
+         "press 9 for game restart",
+         "press 0 for quit"
+  end
 
 end

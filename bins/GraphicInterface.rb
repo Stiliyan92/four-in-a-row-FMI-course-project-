@@ -36,20 +36,16 @@ class GameWindow < Gosu::Window
   end
 
   def check_for_saved_games(loaded_files)
-  	saves_count = loaded_files.size
-    if saves_count == 0
-      return false
-    elsif loaded_files.include? '@save_file_name'
+  	p loaded_files
+    if loaded_files.include? @save_file_name
       return true
     end
   end
 
   def load_game
-  	loaded_files = Game.load_saved_games
-  	unless check_for_saved_games loaded_files
-      return
+  	if check_for_saved_games Game.load_saved_games
+      @game.load_game @save_file_name
     end
-    @game.load_game @save_file_name
   end
 
   def restart_game
@@ -84,7 +80,7 @@ class GameWindow < Gosu::Window
   
   # draw position
     unless @computer_won or @player_won
-      @game.get_board.each_with_index do |row, i|
+      @game.get_board_array.each_with_index do |row, i|
         row.each_with_index do |elem, j|
           if elem != 'E'
             x_coord = j * cell_width + @field_font.text_width(elem)/2.5
