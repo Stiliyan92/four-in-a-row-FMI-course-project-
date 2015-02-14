@@ -33,7 +33,7 @@ class Game
     end
 
     @current_board = board
-	score = turn == @computer ? alpha : beta
+	turn == @computer ? alpha : beta
   end
 
   def get_board_array
