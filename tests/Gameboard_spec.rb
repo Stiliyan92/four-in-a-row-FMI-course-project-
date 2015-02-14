@@ -26,51 +26,51 @@ describe GameBoard do
   end
 
   it 'gets 6 rows from #get_rows' do
-    expect(@gameboard.get_rows.size).to eq 6
+    expect((@gameboard.send :get_rows).size).to eq 6
   end
 
   it 'creates proper string from third row' do
-    expect(@gameboard.get_rows[2]).to eq 'EEXOEEE'
+    expect((@gameboard.send :get_rows)[2]).to eq 'EEXOEEE'
   end
 
   it 'creates proper string from second row' do
-    expect(@gameboard.get_rows[1]).to eq 'OXOOXXO'
+    expect((@gameboard.send :get_rows)[1]).to eq 'OXOOXXO'
   end
 
   it 'gets 7 columns from #get_columns' do
-    expect(@gameboard.get_columns.size).to eq 7
+    expect((@gameboard. send :get_columns).size).to eq 7
   end
 
   it 'creates proper string from third column' do
-    expect(@gameboard.get_columns[2]).to eq 'XOXEEE'
+    expect((@gameboard.send :get_columns)[2]).to eq 'XOXEEE'
   end
 
   it 'creates proper string from fourth column' do
-    expect(@gameboard.get_columns[3]).to eq 'OOOEEE'
+    expect((@gameboard.send :get_columns)[3]).to eq 'OOOEEE'
   end
 
   it 'gets 6 diagonals from #get_diagonals' do
-    expect(@gameboard.get_diagonals.size).to eq 6
+    expect((@gameboard.send :get_diagonals).size).to eq 6
   end
 
   it 'gets 6 anti diagonals from #get_anti_diagonals' do
-    expect(@gameboard.get_anti_diagonals.size).to eq 6
+    expect((@gameboard.send :get_anti_diagonals).size).to eq 6
   end
 
   it 'creates proper string from #get_anti_diagonal' do
-    expect(@gameboard.get_anti_diagonal(0, 0)).to eq 'XXXEEE'
+    expect(@gameboard.send :get_anti_diagonal, 0, 0).to eq 'XXXEEE'
   end
 
   it 'creates proper string from #get_anti_diagonal' do
-    expect(@gameboard.get_anti_diagonal(1,0)).to eq 'OEEEE'
+    expect(@gameboard.send :get_anti_diagonal, 1, 0).to eq 'OEEEE'
   end
 
   it 'creates proper string from #get_diagonal' do
-    expect(@gameboard.get_diagonal(0, 3)).to eq 'OOEE'
+    expect(@gameboard.send :get_diagonal, 0, 3).to eq 'OOEE'
   end
 
   it 'creates proper string from #get_diagonal' do
-    expect(@gameboard.get_diagonal(1,6)).to eq 'OEEEE'
+    expect(@gameboard.send :get_diagonal, 1,6).to eq 'OEEEE'
   end
 
   it 'puts moves in proper column and row' do
@@ -105,11 +105,11 @@ describe GameBoard do
     end
 
     it 'creates proper string from #get_anti_diagonal' do
-      expect(@gameboard.get_anti_diagonal(1,0)).to eq 'OEEXE'
+      expect(@gameboard.send :get_anti_diagonal, 1, 0).to eq 'OEEXE'
     end
 
     it 'creates proper string from #get_diagonal' do
-      expect(@gameboard.get_diagonal(1,6)).to eq 'OEEXE'
+      expect(@gameboard.send :get_diagonal, 1, 6).to eq 'OEEXE'
     end
 
     it '#generate_moves returns array with 6 elements for board with full column' do
