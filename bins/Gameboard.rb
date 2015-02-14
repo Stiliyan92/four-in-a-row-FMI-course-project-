@@ -1,5 +1,5 @@
 require_relative './HeuristicValues.rb'
-require_relative './GetLinesMethods'
+require_relative './GameBoardGetMethods.rb'
 
 class GameBoard
 

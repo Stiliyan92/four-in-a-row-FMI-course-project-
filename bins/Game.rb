@@ -79,7 +79,7 @@ class Game
   end
 
   def self.load_saved_games
-  	if File.directory? './saved_games'
+    if File.directory? './saved_games'
       saves = Dir.entries('./saved_games')
       saves.reject!{ |file| file == '.' or file == '..' }
     else

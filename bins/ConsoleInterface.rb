@@ -36,13 +36,6 @@ class ConsoleInterface
     player_to_start
   end
 
-  def player_move_instruction
-    puts "Select column to play(1...7)",
-         "press 8 for game save",
-         "press 9 for game restart",
-         "press 0 for quit"
-  end
-
   def start_new_game
   	player_to_start = pre_game
     @game = Game.new(player_to_start)

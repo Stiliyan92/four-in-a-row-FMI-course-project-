@@ -22,8 +22,7 @@ class HeuristicValues
     end
   end
 
-  private
-  #setting heuristic values.Next turn is 'x'
+  private  #setting heuristic values.Next turn is 'x'
   def set_heuristic_values_o
     @combos_o[/OOOO/]            = 100000
     @combos_o[/E{1,3}OOOE{1,3}/] = 1000
