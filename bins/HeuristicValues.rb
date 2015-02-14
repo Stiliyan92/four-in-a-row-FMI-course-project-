@@ -15,6 +15,14 @@ class HeuristicValues
     score
   end
 
+  def get_line_score(line, last_played)
+    combos = last_played == 'X' ? @combos_x : @combos_o
+    combos.each do |key, value|
+      return value if key =~ line
+    end
+  end
+
+  private
   #setting heuristic values.Next turn is 'x'
   def set_heuristic_values_o
     @combos_o[/OOOO/]            = 100000
@@ -70,13 +78,6 @@ class HeuristicValues
     @combos_x[/.*/]               = 0
 #    @combos_x[/[^O]XXX[^X]/]     = 80
 #    @combos_x[/^XXX[^X]/]        = 100
-  end
-
-  def get_line_score(line, last_played)
-    combos = last_played == 'X' ? @combos_x : @combos_o
-    combos.each do |key, value|
-      return value if key =~ line
-    end
   end
 
 end
